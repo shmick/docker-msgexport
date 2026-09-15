@@ -1,5 +1,5 @@
 # --- Stage 1: Build Stage ---
-FROM public.ecr.aws/docker/library/rust:1-slim AS builder
+FROM public.ecr.aws/docker/library/rust:1-slim-bookworm AS builder
 
 RUN apt-get update && apt-get install -y \
     pkg-config \
