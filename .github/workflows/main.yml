@@ -11,18 +11,15 @@ on:
 jobs:
   docker:
     permissions:
-      contents: read
-      packages: write
       id-token: write
     uses: docker/github-builder/.github/workflows/build.yml@v1
     with:
       platforms: linux/amd64,linux/arm64
-      push: true
-      tags: |
+      output: type=registry
+      target-tags: |
         ghcr.io/${{ github.repository }}:latest
         ghcr.io/${{ github.repository }}:sha-${{ github.sha }}
-      cache-from: type=gha
-      cache-to: type=gha,mode=max
-    secrets:
       registry-username: ${{ github.actor }}
       registry-password: ${{ secrets.GITHUB_TOKEN }}
+      cache-from: type=gha
+      cache-to: type=gha,mode=max
