@@ -1,7 +1,7 @@
-name: Create and publish a Docker image
+\name: Create and publish a Docker image
 
 on:
-  workflow_dispatch:
+  workflow_dispatch: # Enables manual trigger
   push:
     branches:
       - 'dev'
@@ -19,6 +19,7 @@ jobs:
       platforms: linux/amd64,linux/arm64
       output: image
       push: true
+      meta-images: ghcr.io/${{ github.repository }}
       meta-tags: |
         type=raw,value=latest
         type=sha,format=short
