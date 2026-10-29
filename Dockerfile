@@ -1,5 +1,6 @@
 # --- Stage 1: Build Stage ---
-FROM public.ecr.aws/docker/library/rust:1-slim-bookworm AS builder
+#FROM public.ecr.aws/docker/library/rust:1-slim-bookworm AS builder
+FROM rust:1-slim-bookworm AS builder
 
 RUN apt-get update && apt-get install -y \
     pkg-config \
@@ -9,7 +10,8 @@ RUN apt-get update && apt-get install -y \
 RUN cargo install imessage-exporter
 
 # --- Stage 2: Runtime Stage ---
-FROM public.ecr.aws/docker/library/debian:bookworm-slim
+#FROM public.ecr.aws/docker/library/debian:bookworm-slim
+FROM debian:bookworm-slim
 
 # Install runtime SSL dependencies required by imessage-exporter
 RUN apt-get update && apt-get install -y \
